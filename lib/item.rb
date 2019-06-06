@@ -13,6 +13,10 @@ class Item
     "#{@name}, #{@sell_in}, #{@quality}"
   end
 
+  def special_item?
+    @name != "Aged Brie" || @name != "Backstage passes to a TAFKAL80ETC concert"
+  end
+
   def out_of_date?
     @sell_in < 0
   end
