@@ -28,4 +28,8 @@ class Item
   def decrease_quality
     @quality -= 1
   end
+
+  def reset_quality
+    @quality = 0 
+  end
 end

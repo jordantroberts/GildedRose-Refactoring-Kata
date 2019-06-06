@@ -28,6 +28,11 @@ class GildedRose
                 item.increase_quality
               end
             end
+            if item.sell_in < 0
+              if item.quality < 50
+                return item.reset_quality
+              end
+            end
           end
         end
       end
