@@ -6,6 +6,19 @@ class GildedRose
     @items = items
   end
 
+  def update
+    update_sell_in
+    update_quality
+  end
+
+  def update_sell_in
+    @items.each do |item|
+      if item.name != "Sulfuras, Hand of Ragnaros"
+        item.sell_in -= 1
+      end
+    end
+  end
+
   def update_quality
     @items.each do |item|
       if item.conjured?
@@ -38,9 +51,6 @@ class GildedRose
             end
           end
         end
-      end
-      if item.name != "Sulfuras, Hand of Ragnaros"
-        item.sell_in -= 1
       end
       if item.out_of_date?
         if !item.special_item?

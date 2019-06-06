@@ -40,4 +40,5 @@ class Item
   def reset_quality
     @quality = 0
   end
+
 end

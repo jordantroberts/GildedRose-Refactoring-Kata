@@ -29,38 +29,38 @@ describe GildedRose do
 
     it 'aged brie increases in quality' do
       items =[Item.new("Aged Brie", 10, 5)]
-      GildedRose.new(items).update_quality
+      GildedRose.new(items).update
       expect(items[0].quality).to eq 6
     end
 
     it 'once sell by date passed, quality degrades quicker' do
       items =[Item.new("toast", 0, 4)]
-      GildedRose.new(items).update_quality
+      GildedRose.new(items).update
       expect(items[0].quality).to eq 2
     end
 
     it 'sulfuras are never sold or decreased in quality' do
       items =[Item.new("Sulfuras, Hand of Ragnaros", 10, 10)]
-      GildedRose.new(items).update_quality
+      GildedRose.new(items).update
       expect(items[0].quality).to eq 10
       expect(items[0].sell_in).to eq 10
     end
 
     it 'backstage passes increase in quality as sell in value approaches' do
       items =[Item.new("Backstage passes to a TAFKAL80ETC concert", 5, 5)]
-      GildedRose.new(items).update_quality
+      GildedRose.new(items).update
       expect(items[0].quality).to eq 8
       items =[Item.new("Backstage passes to a TAFKAL80ETC concert", 10, 5)]
-      GildedRose.new(items).update_quality
+      GildedRose.new(items).update
       expect(items[0].quality).to eq 7
       items =[Item.new("Backstage passes to a TAFKAL80ETC concert", -1, 2)]
-      GildedRose.new(items).update_quality
+      GildedRose.new(items).update
       expect(items[0].quality).to eq 0
     end
 
     it 'conjured items degrade twice as fast' do
       items =[Item.new("Conjured", 5, 5)]
-      GildedRose.new(items).update_quality
+      GildedRose.new(items).update
       expect(items[0].quality).to eq 2
     end
   end
