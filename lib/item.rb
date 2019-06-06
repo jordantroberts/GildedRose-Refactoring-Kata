@@ -1,4 +1,4 @@
-require_relative 'guilded_rose'
+require_relative 'gilded_rose'
 
 class Item
   attr_accessor :name, :sell_in, :quality
