@@ -21,34 +21,67 @@ class GildedRose
 
   def update_quality
     @items.each do |item|
-      if item.conjured?
-        item.decrease_double
+      if conjured?(item)
+        decrease_double(item)
       end
-      if !item.special_item?
-        item.not_legendary
+      if !special_item?(item)
+        not_legendary_item(item)
       else
         if item.quality < 50
-          item.increase_quality
+          increase_quality(item)
           if item.name == "Backstage passes to a TAFKAL80ETC concert"
             if item.sell_in < 11
-              item.increase_quality
+              increase_quality(item)
             end
             if item.sell_in < 6
-              item.increase_quality
+              increase_quality(item)
             end
             if item.sell_in < 0 && item.quality < 50
-              return item.reset_quality
+              return item.quality = 0
             end
           end
         end
       end
-      if item.out_of_date?
-        if !item.special_item?
-          item.not_legendary
+      if out_of_date?(item)
+        if !special_item?(item)
+          not_legendary_item(item)
         else
-          item.increase_quality
+          increase_quality(item)
         end
       end
+    end
+  end
+
+  private
+
+  def conjured?(item)
+    item.name == "Conjured"
+  end
+
+  def special_item?(item)
+    item.name == "Aged Brie" || item.name == "Backstage passes to a TAFKAL80ETC concert"
+  end
+
+  def out_of_date?(item)
+    item.sell_in < 0
+  end
+
+  def increase_quality(item)
+    item.quality < 50
+    item.quality += 1
+  end
+
+  def decrease_quality(item)
+    item.quality -= 1
+  end
+
+  def decrease_double(item)
+    item.quality -= 2
+  end
+
+  def not_legendary_item(item)
+    if item.quality > 0 && item.name != "Sulfuras, Hand of Ragnaros"
+      decrease_quality(item)
     end
   end
 end
