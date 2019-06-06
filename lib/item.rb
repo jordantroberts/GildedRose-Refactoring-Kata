@@ -14,7 +14,7 @@ class Item
   end
 
   def special_item?
-    @name != "Aged Brie" || @name != "Backstage passes to a TAFKAL80ETC concert"
+    @name == "Aged Brie" || @name == "Backstage passes to a TAFKAL80ETC concert"
   end
 
   def out_of_date?

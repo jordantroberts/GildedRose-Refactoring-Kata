@@ -8,7 +8,7 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
-      if item.special_item?
+      if !item.special_item?
         if item.quality > 0
           if item.name != "Sulfuras, Hand of Ragnaros"
             item.decrease_quality
@@ -35,7 +35,7 @@ class GildedRose
         item.sell_in = item.sell_in - 1
       end
       if item.out_of_date?
-        if item.special_item?
+        if !item.special_item?
           if item.quality > 0
             if item.name != "Sulfuras, Hand of Ragnaros"
               item.decrease_quality
