@@ -36,20 +36,15 @@ class GildedRose
             if item.sell_in < 6
               item.increase_quality
             end
-            if item.sell_in < 0
-              if item.quality < 50
-                return item.reset_quality
-              end
+            if item.sell_in < 0 && item.quality < 50
+              return item.reset_quality
             end
           end
         end
       end
       if item.out_of_date?
         if !item.special_item?
-          if item.not_legendary
-          else
-            item.decrease_quality
-          end
+          item.not_legendary
         else
           item.increase_quality
         end
