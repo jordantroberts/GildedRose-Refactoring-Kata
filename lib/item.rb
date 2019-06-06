@@ -12,4 +12,16 @@ class Item
   def to_s()
     "#{@name}, #{@sell_in}, #{@quality}"
   end
+
+  def out_of_date?
+    @sell_in < 0
+  end
+
+  def increase_quality
+    @quality += 1
+  end
+
+  def decrease_quality
+    @quality -= 1
+  end
 end
