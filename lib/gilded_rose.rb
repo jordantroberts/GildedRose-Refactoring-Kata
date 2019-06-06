@@ -6,8 +6,11 @@ class GildedRose
     @items = items
   end
 
-  def update_quality()
+  def update_quality
     @items.each do |item|
+      if item.conjured?
+        item.decrease_double
+      end
       if !item.special_item?
         if item.quality > 0
           if item.name != "Sulfuras, Hand of Ragnaros"
@@ -16,7 +19,7 @@ class GildedRose
         end
       else
         if item.quality < 50
-          item.quality = item.quality + 1
+          item.increase_quality
           if item.name == "Backstage passes to a TAFKAL80ETC concert"
             if item.sell_in < 11
               if item.quality < 50
@@ -37,7 +40,7 @@ class GildedRose
         end
       end
       if item.name != "Sulfuras, Hand of Ragnaros"
-        item.sell_in = item.sell_in - 1
+        item.sell_in -= 1
       end
       if item.out_of_date?
         if !item.special_item?

@@ -17,6 +17,10 @@ class Item
     @name == "Aged Brie" || @name == "Backstage passes to a TAFKAL80ETC concert"
   end
 
+  def conjured?
+    @name == "Conjured"
+  end
+
   def out_of_date?
     @sell_in < 0
   end
@@ -29,7 +33,11 @@ class Item
     @quality -= 1
   end
 
+  def decrease_double
+    @quality -= 2
+  end
+
   def reset_quality
-    @quality = 0 
+    @quality = 0
   end
 end
