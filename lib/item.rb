@@ -15,6 +15,7 @@ class Item
 
   def special_item?
     @name == "Aged Brie" || @name == "Backstage passes to a TAFKAL80ETC concert"
+
   end
 
   def conjured?
@@ -26,6 +27,7 @@ class Item
   end
 
   def increase_quality
+    @quality < 50
     @quality += 1
   end
 
@@ -41,4 +43,11 @@ class Item
     @quality = 0
   end
 
+  def not_legendary
+    if @quality > 0
+      if @name != "Sulfuras, Hand of Ragnaros"
+        decrease_quality
+      end
+    end
+  end
 end
