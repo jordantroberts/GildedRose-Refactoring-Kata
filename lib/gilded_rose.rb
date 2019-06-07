@@ -2,6 +2,8 @@ require_relative 'item'
 
 class GildedRose
 
+  MAXIMUM_QUALITY = 50
+
   def initialize(items)
     @items = items
   end
@@ -27,7 +29,6 @@ class GildedRose
       if !special_item?(item)
         not_legendary_item(item)
       else
-        if item.quality < 50
           increase_quality(item)
           if item.name == "Backstage passes to a TAFKAL80ETC concert"
             if item.sell_in < 11
@@ -39,7 +40,7 @@ class GildedRose
             if item.sell_in < 0 && item.quality < 50
               return item.quality = 0
             end
-          end
+          
         end
       end
       if out_of_date?(item)
@@ -67,8 +68,7 @@ class GildedRose
   end
 
   def increase_quality(item)
-    item.quality < 50
-    item.quality += 1
+    item.quality += 1 if below_max_quality?(item)
   end
 
   def decrease_quality(item)
@@ -77,6 +77,10 @@ class GildedRose
 
   def decrease_double(item)
     item.quality -= 2
+  end
+
+  def below_max_quality?(item)
+    item.quality < MAXIMUM_QUALITY
   end
 
   def not_legendary_item(item)
