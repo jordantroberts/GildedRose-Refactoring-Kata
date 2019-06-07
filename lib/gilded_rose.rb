@@ -29,7 +29,6 @@ class GildedRose
           increase_quality(item)
           increase_quality(item) if out_of_date?(item)
         end
-
         if item.name == "Backstage passes to a TAFKAL80ETC concert"
           increase_double(item)
           increase_quality(item) if item.sell_in < 11
