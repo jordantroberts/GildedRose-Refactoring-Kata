@@ -23,44 +23,27 @@ class GildedRose
 
   def update_quality
     @items.each do |item|
-      if conjured?(item)
-        decrease_double(item)
-      end
-      if !special_item?(item)
-        not_legendary_item(item)
-      else
+      decrease_quality(item)
+      decrease_quality(item) if out_of_date?(item)
+        if item.name == "Aged Brie"
           increase_quality(item)
-          if item.name == "Backstage passes to a TAFKAL80ETC concert"
-            if item.sell_in < 11
-              increase_quality(item)
-            end
-            if item.sell_in < 6
-              increase_quality(item)
-            end
-            if item.sell_in < 0 && item.quality < 50
-              return item.quality = 0
-            end
-          
+          increase_quality(item) if out_of_date?(item)
         end
-      end
-      if out_of_date?(item)
-        if !special_item?(item)
-          not_legendary_item(item)
-        else
-          increase_quality(item)
+
+        if item.name == "Backstage passes to a TAFKAL80ETC concert"
+          increase_double(item)
+          increase_quality(item) if item.sell_in < 11
+          increase_quality(item) if item.sell_in < 6
+          return item.quality = 0 if out_of_date?(item)
         end
       end
     end
-  end
+
 
   private
 
   def conjured?(item)
     item.name == "Conjured"
-  end
-
-  def special_item?(item)
-    item.name == "Aged Brie" || item.name == "Backstage passes to a TAFKAL80ETC concert"
   end
 
   def out_of_date?(item)
@@ -72,20 +55,23 @@ class GildedRose
   end
 
   def decrease_quality(item)
-    item.quality -= 1
+    if item.name != "Sulfuras, Hand of Ragnaros" && item.name != "Aged Brie"
+      if item.quality > 0
+        item.quality -= 1
+        decrease_double(item) if conjured?(item)
+      end
+    end
   end
 
   def decrease_double(item)
     item.quality -= 2
   end
 
-  def below_max_quality?(item)
-    item.quality < MAXIMUM_QUALITY
+  def increase_double(item)
+    item.quality += 2
   end
 
-  def not_legendary_item(item)
-    if item.quality > 0 && item.name != "Sulfuras, Hand of Ragnaros"
-      decrease_quality(item)
-    end
+  def below_max_quality?(item)
+    item.quality < MAXIMUM_QUALITY
   end
 end
