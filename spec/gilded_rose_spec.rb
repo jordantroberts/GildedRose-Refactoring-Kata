@@ -61,7 +61,7 @@ describe GildedRose do
     it 'conjured items degrade twice as fast' do
       items =[Item.new("Conjured", 5, 5)]
       GildedRose.new(items).update
-      expect(items[0].quality).to eq 2
+      expect(items[0].quality).to eq 3
     end
   end
 end

@@ -57,13 +57,9 @@ class GildedRose
     if item.name != "Sulfuras, Hand of Ragnaros" && item.name != "Aged Brie"
       if item.quality > 0
         item.quality -= 1
-        decrease_double(item) if conjured?(item)
+        item.quality -= 1 if conjured?(item)
       end
     end
-  end
-
-  def decrease_double(item)
-    item.quality -= 2
   end
 
   def increase_double(item)
